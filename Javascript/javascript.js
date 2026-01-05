@@ -1,5 +1,18 @@
 let livres = [];
 let rotationActuelle = 0;
+const colors = [
+  "#e0f7fa",
+  "#b2ebf2",
+  "#80deea",
+  "#4dd0e1",
+  "#26c6da",
+  "#00bcd4",
+  "#00acc1",
+  "#0097a7",
+  "#00838f",
+  "#006064",
+];
+// Palette harmonieuse avec le thème (bleu/vert d'eau)
 
 function ajouterLivre() {
   const input = document.getElementById("nouveauLivre");
@@ -12,8 +25,44 @@ function ajouterLivre() {
 
   livres.push(titre);
   input.value = "";
+  updateRoue();
+}
 
-  alert(`📚 "${titre}" ajouté à la roue !`);
+function updateRoue() {
+  const roue = document.getElementById("roue");
+  roue.innerHTML = ""; // Vider la roue
+  const nbLivres = livres.length;
+
+  if (nbLivres === 0) {
+    roue.style.background = "#5b7cab";
+    return;
+  }
+
+  const step = 360 / nbLivres;
+  let gradientParts = [];
+
+  for (let i = 0; i < nbLivres; i++) {
+    const color = colors[i % colors.length];
+    const startDeg = i * step;
+    const endDeg = (i + 1) * step;
+    gradientParts.push(`${color} ${startDeg}deg ${endDeg}deg`);
+
+    // Ajout du label
+    const label = document.createElement("div");
+    label.className = "roue-label";
+    const labelAngle = startDeg + step / 2 - 90; // -90 car 0deg est à droite en CSS transform
+    label.style.transform = `rotate(${labelAngle}deg)`;
+
+    const span = document.createElement("span");
+    span.textContent = livres[i];
+    // On inverse le texte si on est sur la partie gauche pour la lisibilité ?
+    // Pour l'instant on garde simple, le texte rayonne depuis le centre
+
+    label.appendChild(span);
+    roue.appendChild(label);
+  }
+
+  roue.style.background = `conic-gradient(${gradientParts.join(", ")})`;
 }
 
 function tournerRoue() {
@@ -22,15 +71,47 @@ function tournerRoue() {
     return;
   }
 
-  const roue = document.getElementById("roue");
-  const rotation = Math.floor(Math.random() * 360) + 720;
-  rotationActuelle += rotation;
+  const btn = document.getElementById("btnLancer");
+  const resultDiv = document.getElementById("resultat");
+  btn.disabled = true;
+  resultDiv.textContent = "La roue tourne...";
 
+  // Rotation aléatoire : au moins 5 tours (1800deg) + aléatoire
+  const randomDeg = Math.floor(Math.random() * 360);
+  const totalRotation = rotationActuelle + 1800 + randomDeg;
+
+  // On s'assure que rotationActuelle augmente toujours pour que ça tourne dans le même sens
+  rotationActuelle = totalRotation;
+
+  const roue = document.getElementById("roue");
+  // Rotation sens horaire
   roue.style.transform = `rotate(${rotationActuelle}deg)`;
 
   setTimeout(() => {
-    const index = Math.floor(Math.random() * livres.length);
-    document.getElementById("resultat").textContent =
-      "📖 Ta prochaine lecture : " + livres[index];
-  }, 3000);
+    btn.disabled = false;
+
+    // Calcul du gagnant
+    // La flèche est statique en haut (0deg).
+    // La roue a tourné de `rotationActuelle`.
+    // La position 0 de la roue est maintenant à `rotationActuelle % 360`.
+    // L'élément sous la flèche (0deg global) est celui qui était à `(360 - (rotationActuelle % 360)) % 360` au départ.
+
+    const actualDeg = rotationActuelle % 360;
+    const winningAngle = (360 - actualDeg) % 360;
+    const sliceSize = 360 / livres.length;
+
+    const index = Math.floor(winningAngle / sliceSize);
+
+    // Protection contre index hors bornes (arrondi)
+    const safeIndex = index >= livres.length ? 0 : index;
+
+    resultDiv.textContent = `📖 Lecture choisie : ${livres[safeIndex]}`;
+
+    // Animation de célébration optionnelle
+  }, 4000); // Correspond à la durée css transition (4s)
 }
+
+// Initialisation au chargement
+document.addEventListener("DOMContentLoaded", () => {
+  updateRoue();
+});

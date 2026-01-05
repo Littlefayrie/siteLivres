@@ -4,24 +4,28 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../css/style.css" rel="stylesheet">
+    <script src="../Javascript/javascript.js"></script>
     <title>Ma Pal</title>
     <script src="../Javascript/javascript.js"></script>
 </head>
 
 <body>
     <header>
-        <h1 class="Titre"> Notre Pal </h1>
+        <h1 class="Titre"> Ma PAL </h1>
 
     </header>
     <nav class="liens">
-        <a href="/index.html">
+        <a href="../index.html">
             <h2> Accueil </h2>
         </a>
         <a href="2lexique.html">
             <h2> Lexique </h2>
         </a>
-        <a href="/html/3annotation.html">
+        <a href="3annotation.html">
             <h2> Annotations </h2>
+        </a>
+        <a href="4mapal.html">
+            <h2> Ma PAL </h2>
         </a>
         <a href="5wishlist.html">
             <h2> Ma Wishlist </h2>
@@ -32,9 +36,18 @@
     </nav>
 
     <div class="ajout-livre">
-  <input type="text" id="nouveauLivre" placeholder="Ajouter un livre 📖">
-  <button onclick="ajouterLivre()">Ajouter</button>
-</div>
+        <input type="text" id="nouveauLivre" placeholder="Ajouter un livre 📖">
+        <button onclick="ajouterLivre()">Ajouter</button>
+    </div>
+
+    <div class="roue-section">
+        <div class="roue-container">
+            <div class="fleche">⬇</div>
+            <div id="roue" class="roue"></div>
+        </div>
+        <button id="btnLancer" onclick="tournerRoue()">Lancer la roue</button>
+        <h3 id="resultat"></h3>
+    </div>
 
 
 </body>
