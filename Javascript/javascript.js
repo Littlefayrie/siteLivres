@@ -1,3 +1,21 @@
+let livres = [];
+let rotationActuelle = 0;
+
+function ajouterLivre() {
+  const input = document.getElementById("nouveauLivre");
+  const titre = input.value.trim();
+
+  if (titre === "") {
+    alert("Ajoute un titre de livre 😊");
+    return;
+  }
+
+  livres.push(titre);
+  input.value = "";
+
+  alert(`📚 "${titre}" ajouté à la roue !`);
+}
+
 function tournerRoue() {
   if (livres.length === 0) {
     alert("Ajoute au moins un livre avant de lancer la roue !");
