@@ -15,7 +15,7 @@ body {
     border-radius: 10px;
     padding: 10px 10px 10px 10px;
     font-size: large;
-    font-weight: 100px;
+    font-weight: 100;
     box-shadow: 0 4px 10px;
 
 }
@@ -136,22 +136,125 @@ blockquote {
 /* ajout pour ma pal*/
 
 .ajout-livre {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .ajout-livre input {
-  padding: 10px;
-  border-radius: 15px;
-  border: 1px solid #b5c9b7;
-  width: 220px;
+    padding: 10px;
+    border-radius: 15px;
+    border: 1px solid #b5c9b7;
+    width: 220px;
 }
 
 .ajout-livre button {
-  padding: 10px 16px;
-  border-radius: 15px;
-  border: none;
-  background-color: #9bb7a0;
-  color: white;
-  cursor: pointer;
-  margin-left: 10px;
+    padding: 10px 16px;
+    border-radius: 15px;
+    border: none;
+    background-color: #9bb7a0;
+    color: white;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+/* Roue de la fortune */
+.roue-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    gap: 20px;
+}
+
+.roue-container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+}
+
+.roue {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 5px solid #5b7cab;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+    /* Ease-out pour un arrêt réaliste */
+    position: relative;
+    overflow: hidden;
+}
+
+.fleche {
+    font-size: 3rem;
+    color: #c5dbf5;
+    position: absolute;
+    top: -35px;
+    /* Ajusté pour être bien au dessus */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    /* Z-index supérieur à la roue */
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+    /* Pour ne pas gêner */
+}
+
+#btnLancer {
+    padding: 12px 24px;
+    font-size: 1.2rem;
+    border-radius: 25px;
+    border: none;
+    background-color: #5b7cab;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#btnLancer:hover {
+    background-color: #4a658a;
+}
+
+#btnLancer:disabled {
+    background-color: #889bb5;
+    cursor: not-allowed;
+}
+
+#resultat {
+    color: #c5dbf5;
+    font-size: 1.5rem;
+    text-align: center;
+    min-height: 2rem;
+}
+
+/* Texte sur la roue (généré par JS) */
+.roue-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50%;
+    height: 40px;
+    /* Hauteur suffisante pour le texte */
+    transform-origin: 0 50%;
+    /* Pivot sur le milieu du bord gauche */
+    margin-top: -20px;
+    /* Centrer verticalement (moitié de height) */
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    /* Texte vers l'extérieur */
+    padding-right: 30px;
+    /* Marge par rapport au bord */
+    box-sizing: border-box;
+    z-index: 15;
+    pointer-events: none;
+}
+
+.roue-label span {
+    font-size: 14px;
+    font-weight: bold;
+    color: #01030b;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 120px;
+    text-shadow: 0 0 3px rgba(255, 255, 255, 0.8);
 }
