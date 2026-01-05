@@ -133,28 +133,25 @@ blockquote {
     box-shadow: 0 4px 10px;
 }
 
-.tableau {
-    text-align: center;
-    color: #5b7cab;
+/* ajout pour ma pal*/
+
+.ajout-livre {
+  margin-bottom: 20px;
 }
- table {
-        width: 60%;
-        border-collapse: collapse;
-        margin: 20px 300px ;
-        background-color: #f9f7f1;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
 
-    th,
-    td {
-        border: 10px solid #ddd;
-        padding: 10px;
-       
-    }
+.ajout-livre input {
+  padding: 10px;
+  border-radius: 15px;
+  border: 1px solid #b5c9b7;
+  width: 220px;
+}
 
-    th {
-        background-color: #e0dcd5;
-        color: #4b4b4b;
-       
-    }
+.ajout-livre button {
+  padding: 10px 16px;
+  border-radius: 15px;
+  border: none;
+  background-color: #9bb7a0;
+  color: white;
+  cursor: pointer;
+  margin-left: 10px;
+}
