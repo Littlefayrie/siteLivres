@@ -1,8 +1,18 @@
+function tournerRoue() {
+  if (livres.length === 0) {
+    alert("Ajoute au moins un livre avant de lancer la roue !");
+    return;
+  }
 
-function addRow() {
-  var table = document.getElementById("myTable");
-  var row = table.insertRow();
-  row.insertCell(0).innerHTML = document.getElementById("titre").value;
-  row.insertCell(1).innerHTML = document.getElementById("auteur").value;
-  row.insertCell(2).innerHTML = document.getElementById("statut").value;
+  const roue = document.getElementById("roue");
+  const rotation = Math.floor(Math.random() * 360) + 720;
+  rotationActuelle += rotation;
+
+  roue.style.transform = `rotate(${rotationActuelle}deg)`;
+
+  setTimeout(() => {
+    const index = Math.floor(Math.random() * livres.length);
+    document.getElementById("resultat").textContent =
+      "📖 Ta prochaine lecture : " + livres[index];
+  }, 3000);
 }
