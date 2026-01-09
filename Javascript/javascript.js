@@ -115,3 +115,12 @@ function tournerRoue() {
 document.addEventListener("DOMContentLoaded", () => {
   updateRoue();
 });
+
+/* ajout pour ma page challenge */ 
+const cases = document.querySelectorAll(".case");
+
+cases.forEach(caseBingo => {
+  caseBingo.addEventListener("click", () => {
+    caseBingo.classList.toggle("active");
+  });
+});
