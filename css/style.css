@@ -258,3 +258,46 @@ blockquote {
     max-width: 120px;
     text-shadow: 0 0 3px rgba(255, 255, 255, 0.8);
 }
+/*ajout pour ma page challenge */ 
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f3f6f4;
+  text-align: center;
+  color: #5f5a55;
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+.bingo {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  max-width: 800px;
+  margin: auto;
+}
+
+.case {
+  padding: 12px;
+  background-color: #e6efe8;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: 0.2s;
+}
+
+.case:hover {
+  background-color: #d6e4d9;
+}
+
+.case.active {
+  background-color: #9bb7a0;
+  color: white;
+}
+
+.free {
+  background-color: #c4d6c8;
+  font-weight: bold;
+}
