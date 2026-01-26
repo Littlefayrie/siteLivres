@@ -14,6 +14,26 @@ const colors = [
 ];
 // Palette harmonieuse avec le thème (bleu/vert d'eau)
 
+function genererHeaderFooter() {
+  const headerHTML = `
+    <header>
+        <h1 class="Titre">Mon Univers Livresque</h1>
+        <nav class="liens">
+            <a href="index.html">Accueil</a>
+            <a href="pal.html">Ma PAL</a>
+            <a href="challenge.html">Challenge</a>
+        </nav>
+    </header>`;
+
+  const footerHTML = `
+    <footer>
+        <p class="couleur">© 2026 - Site de Livres. Fait avec passion.</p>
+    </footer>`;
+
+  document.body.insertAdjacentHTML("afterbegin", headerHTML);
+  document.body.insertAdjacentHTML("beforeend", footerHTML);
+}
+
 function ajouterLivre() {
   const input = document.getElementById("nouveauLivre");
   const titre = input.value.trim();
@@ -30,6 +50,7 @@ function ajouterLivre() {
 
 function updateRoue() {
   const roue = document.getElementById("roue");
+  if (!roue) return; // Sécurité : on arrête si la roue n'existe pas sur cette page
   roue.innerHTML = ""; // Vider la roue
   const nbLivres = livres.length;
 
@@ -113,6 +134,7 @@ function tournerRoue() {
 
 // Initialisation au chargement
 document.addEventListener("DOMContentLoaded", () => {
+  genererHeaderFooter();
   updateRoue();
 });
 
