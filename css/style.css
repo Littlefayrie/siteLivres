@@ -260,17 +260,6 @@ blockquote {
 }
 /*ajout pour ma page challenge */ 
 
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f3f6f4;
-  text-align: center;
-  color: #5f5a55;
-}
-
-h1 {
-  margin-bottom: 20px;
-}
-
 .bingo {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -295,6 +284,16 @@ h1 {
 .case.active {
   background-color: #9bb7a0;
   color: white;
+}
+
+footer {
+    background-color: #1a2d4c; /* Le même bleu que la bordure du menu */
+    color: #c5dbf5;
+    padding: 20px 0;
+    margin-top: 50px;
+    border-top: 3px solid #5b7cab; /* Une petite ligne de séparation */
+    width: 100%;
+    text-align: center;
 }
 
 .free {

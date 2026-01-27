@@ -15,13 +15,21 @@ const colors = [
 // Palette harmonieuse avec le thème (bleu/vert d'eau)
 
 function genererHeaderFooter() {
+  // Détection automatique du chemin pour que les liens marchent partout
+  const estDansDossierHtml = window.location.pathname.toLowerCase().includes("/html/");
+  const basePath = estDansDossierHtml ? "../" : "./";
+
   const headerHTML = `
     <header>
         <h1 class="Titre">Mon Univers Livresque</h1>
         <nav class="liens">
-            <a href="index.html">Accueil</a>
-            <a href="pal.html">Ma PAL</a>
-            <a href="challenge.html">Challenge</a>
+            <a href="${basePath}index.html">Accueil</a>
+            <a href="${basePath}html/3annotation.html">Mes Annotations</a>
+            <a href="${basePath}html/4mapal.html">Ma PAL</a>
+            <a href="${basePath}html/5wishlist.html">Ma Wishlist</a>
+            <a href="${basePath}html/challenge%20.html">Challenge</a>
+            <a href="${basePath}html/avis.html">Avis</a>
+            <a href="${basePath}html/contact.html">Contact</a>
         </nav>
     </header>`;
 
