@@ -23,6 +23,7 @@ body {
 .Titre {
     text-align: center;
     color: #5b7cab;
+    margin-bottom: 40px;
 }
 
 .couleur {
@@ -299,4 +300,321 @@ footer {
 .free {
   background-color: #c4d6c8;
   font-weight: bold;
+}
+
+/* --- Bouton Dark/Light Mode --- */
+.theme-btn {
+    position: fixed; /* Fixé à l'écran */
+    right: 20px;     /* À droite */
+    top: 50%;        /* Centré verticalement */
+    transform: translateY(-50%);
+    z-index: 1000;   /* Au-dessus du reste */
+    
+    background-color: #1a2d4c;
+    border: 2px solid #5b7cab;
+    border-radius: 30px; /* Forme de pilule */
+    width: 40px;
+    height: 80px;    /* Hauteur plus grande pour l'effet switch */
+    box-sizing: border-box; /* Assure que la taille inclut les bordures */
+    cursor: pointer;
+    color: #c5dbf5;
+    transition: all 0.3s ease;
+    
+    /* Gestion de l'icône */
+    padding: 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.theme-btn:hover {
+    transform: translateY(-50%) scale(1.1); /* On garde le centrage vertical + agrandissement */
+    box-shadow: 0 0 15px rgba(91, 124, 171, 0.6);
+    background-color: #5b7cab;
+    color: #fff;
+}
+
+.theme-btn svg {
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
+    position: absolute; /* Positionnement libre dans le bouton */
+    left: 50%;
+    top: 6px; /* La lune calée en haut */
+    transform: translateX(-50%); /* Centrage horizontal parfait */
+    transition: transform 0.3s ease;
+}
+
+/* --- Styles Light Mode (Mode Clair) --- */
+body.light-mode {
+    background-color: #f4f6f8; /* Fond gris très clair */
+    color: #1a2d4c; /* Texte bleu foncé */
+}
+
+body.light-mode .genre,
+body.light-mode .lexique {
+    color: #1a2d4c;
+    border-color: #1a2d4c;
+    background-color: #ffffff;
+}
+
+body.light-mode .Titre,
+body.light-mode .couleur,
+body.light-mode #resultat,
+body.light-mode .fleche {
+    color: #1a2d4c;
+}
+
+body.light-mode .liens {
+    border-color: #9bb7a0;
+}
+
+body.light-mode a:link,
+body.light-mode a:visited {
+    color: #2c5282;
+}
+
+body.light-mode footer {
+    background-color: #e6efe8;
+    color: #1a2d4c;
+    border-top-color: #9bb7a0;
+}
+
+body.light-mode .roue {
+    border-color: #1a2d4c;
+}
+
+body.light-mode .theme-btn {
+    background-color: #fff;
+    border-color: #9bb7a0;
+    color: #f39c12;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Déplace l'icône vers le bas en mode clair */
+body.light-mode .theme-btn svg {
+    transform: translateX(-50%) translateY(40px); /* Le soleil descend de 40px */
+}
+
+/* --- Formulaire de Contact --- */
+.contact-box {
+    border: 3px solid #5b7cab;
+    border-radius: 15px;
+    padding: 30px;
+    max-width: 600px;
+    margin: 50px auto; /* Centré avec marge */
+    background-color: rgba(26, 45, 76, 0.3);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    color: #c5dbf5;
+}
+
+.contact-box h2 {
+    text-align: center;
+    color: #5b7cab;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.contact-box input,
+.contact-box textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #5b7cab;
+    background-color: #01030b;
+    color: #c5dbf5;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+.contact-box input:focus,
+.contact-box textarea:focus {
+    outline: none;
+    border-color: #c5dbf5;
+    box-shadow: 0 0 8px rgba(91, 124, 171, 0.4);
+}
+
+.contact-box button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    border-radius: 25px;
+    border: none;
+    background-color: #5b7cab;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.contact-box button:hover {
+    background-color: #4a658a;
+}
+
+/* Adaptation Light Mode pour le formulaire */
+body.light-mode .contact-box {
+    background-color: #ffffff;
+    border-color: #1a2d4c;
+    color: #1a2d4c;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+body.light-mode .contact-box h2 {
+    color: #1a2d4c;
+}
+
+body.light-mode .contact-box input,
+body.light-mode .contact-box textarea {
+    background-color: #f4f6f8;
+    color: #1a2d4c;
+    border-color: #9bb7a0;
+}
+
+body.light-mode .contact-box button {
+    background-color: #1a2d4c;
+}
+
+body.light-mode .contact-box button:hover {
+    background-color: #2c5282;
+}
+
+/* --- Modal Bingo (Carte en avant) --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Fond sombre transparent */
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.open {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-card {
+    background-color: #01030b;
+    border: 3px solid #5b7cab;
+    padding: 30px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(91, 124, 171, 0.5);
+    transform: scale(0.7);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Effet rebond */
+    position: relative;
+}
+
+.modal-overlay.open .modal-card {
+    transform: scale(1);
+}
+
+.modal-card h3 {
+    color: #c5dbf5;
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+}
+
+.modal-btn {
+    padding: 12px 24px;
+    border-radius: 25px;
+    border: none;
+    background-color: #9bb7a0;
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.modal-btn:hover {
+    background-color: #7a9680;
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 2rem;
+    color: #5b7cab;
+    cursor: pointer;
+    line-height: 1;
+}
+
+/* Adaptation Light Mode pour la carte */
+body.light-mode .modal-card {
+    background-color: #ffffff;
+    border-color: #1a2d4c;
+}
+
+body.light-mode .modal-card h3 {
+    color: #1a2d4c;
+}
+
+/* --- Liens du Footer (Style moins formel) --- */
+.footer-links {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: fit-content;       /* Le bloc s'adapte à la largeur du texte */
+    margin: 0 auto 15px auto; /* Centre le bloc horizontalement */
+    padding-left: 0;
+    gap: 8px;
+}
+
+.footer-links a {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #889bb5; /* Couleur plus discrète */
+    display: inline-block;
+}
+
+.footer-links a:hover {
+    color: #c5dbf5;
+    text-decoration: underline;
+}
+
+/* --- Adaptation Mobile (Media Queries) --- */
+@media screen and (max-width: 768px) {
+    /* Navigation : on passe en colonne pour que ça rentre */
+    .liens {
+        flex-direction: column;
+        gap: 10px;
+        padding-bottom: 15px;
+    }
+
+    /* On annule la grande marge des liens du menu */
+    .liens a {
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+
+    /* Bingo : 2 colonnes au lieu de 7 pour la lisibilité */
+    .bingo {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Images : s'adaptent à la largeur de l'écran */
+    .couverture, 
+    .annotations {
+        max-width: 100%;
+        height: auto;
+    }
 }
