@@ -295,6 +295,7 @@ footer {
     border-top: 3px solid #5b7cab; /* Une petite ligne de séparation */
     width: 100%;
     text-align: center;
+    position: relative;
 }
 
 .free {
@@ -689,4 +690,252 @@ body.light-mode .hamburger span {
         max-width: 100%;
         height: auto;
     }
+
+    /* Sur mobile, on remet le bouton au centre */
+    .footer-action {
+        position: static;
+        margin: 20px 0;
+        transform: none;
+    }
+}
+
+/* --- Chronomètre --- */
+.chrono-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+    gap: 30px;
+}
+
+.chrono-display {
+    font-size: 4rem;
+    font-family: 'Courier New', Courier, monospace;
+    color: #c5dbf5;
+    text-shadow: 0 0 15px rgba(91, 124, 171, 0.5);
+    border: 4px solid #5b7cab;
+    padding: 20px 40px;
+    border-radius: 20px;
+    background-color: rgba(26, 45, 76, 0.3);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    letter-spacing: 5px;
+}
+
+.chrono-controls {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.chrono-btn {
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    color: white;
+    font-family: 'Georgia', serif;
+}
+
+.chrono-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(255,255,255,0.2);
+}
+
+.chrono-btn.start { background-color: #9bb7a0; }
+.chrono-btn.pause { background-color: #eebb4d; color: #01030b; }
+.chrono-btn.reset { background-color: #d9534f; }
+
+/* Adaptation Light Mode pour le chrono */
+body.light-mode .chrono-display {
+    color: #1a2d4c;
+    border-color: #1a2d4c;
+    background-color: #ffffff;
+    text-shadow: none;
+}
+
+/* --- Pomodoro Controls --- */
+.pomodoro-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    color: #c5dbf5;
+    font-size: 1.2rem;
+}
+
+.pomodoro-controls input[type=range] {
+    width: 300px;
+    height: 8px;
+    background: #1a2d4c;
+    border-radius: 5px;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+}
+
+.pomodoro-controls input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #5b7cab;
+    border-radius: 50%;
+    border: 2px solid #c5dbf5;
+    transition: background .3s;
+}
+
+.pomodoro-controls input[type=range]::-webkit-slider-thumb:hover {
+    background: #9bb7a0;
+}
+
+/* Adaptation Light Mode pour le slider */
+body.light-mode .pomodoro-controls {
+    color: #1a2d4c;
+}
+body.light-mode .pomodoro-controls input[type=range] {
+    background: #c5dbf5;
+}
+
+/* --- Bouton Footer Chrono --- */
+.btn-footer-chrono {
+    background-color: #5b7cab;
+    color: white !important; /* Force la couleur blanche sur le lien */
+    padding: 12px 25px;
+    border-radius: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    border: 2px solid transparent;
+    animation: glowing 2s infinite alternate;
+}
+
+.btn-footer-chrono:hover {
+    background-color: #9bb7a0;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(155, 183, 160, 0.4);
+}
+
+/* Adaptation Light Mode */
+body.light-mode .btn-footer-chrono {
+    background-color: #1a2d4c;
+}
+
+/* Positionnement du bouton footer à droite */
+.footer-action {
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Animation Glowing (Lueur) */
+@keyframes glowing {
+    from { box-shadow: 0 0 5px #5b7cab, 0 0 10px #5b7cab; }
+    to { box-shadow: 0 0 20px #5b7cab, 0 0 20px #9bb7a0; }
+}
+
+/* --- Page Avis --- */
+.avis-category {
+    margin-bottom: 50px;
+}
+
+.avis-category-title {
+    color: #5b7cab;
+    border-bottom: 2px solid #1a2d4c;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+.avis-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 25px;
+}
+
+.avis-card {
+    background-color: rgba(26, 45, 76, 0.3);
+    border: 2px solid #5b7cab;
+    border-radius: 15px;
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.avis-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(91, 124, 171, 0.4);
+}
+
+.avis-card-img {
+    width: 100%;
+    height: 200px;
+    background-color: #1a2d4c;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    font-size: 3rem; /* Pour les émojis placeholders */
+}
+
+.avis-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.avis-card h3 {
+    color: #c5dbf5;
+    font-size: 1.2rem;
+    margin: 10px 0 5px 0;
+}
+
+.avis-card p {
+    color: #889bb5;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
+
+.avis-link {
+    background-color: #5b7cab;
+    color: white !important;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    margin-right: 0 !important; /* Annule la marge par défaut des liens */
+    transition: background 0.3s;
+}
+
+.avis-link:hover {
+    background-color: #9bb7a0;
+}
+
+/* Adaptation Light Mode pour les avis */
+body.light-mode .avis-category-title {
+    color: #1a2d4c;
+    border-color: #9bb7a0;
+}
+
+body.light-mode .avis-card {
+    background-color: #ffffff;
+    border-color: #1a2d4c;
+}
+
+body.light-mode .avis-card h3 {
+    color: #1a2d4c;
+}
+
+body.light-mode .avis-card-img {
+    background-color: #e6efe8;
 }

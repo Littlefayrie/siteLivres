@@ -51,7 +51,11 @@ function genererHeaderFooter() {
             <a href="${basePath}html/5wishlist.html">Wishlist</a>
             <a href="${basePath}html/challenge%20.html">Challenge</a>
             <a href="${basePath}html/avis.html">Avis</a>
+            <a href="${basePath}html/chronomettre.html">Chronomètre</a>
             <a href="${basePath}html/contact.html">Contact</a>
+        </div>
+        <div class="footer-action">
+            <a href="${basePath}html/chronomettre.html" class="btn-footer-chrono">Lancer une session lecture ⏱️</a>
         </div>
         <p class="couleur">© 2026 - Site de Livres. Fait avec passion.</p>
     </footer>`;
@@ -154,7 +158,15 @@ function tournerRoue() {
     // Protection contre index hors bornes (arrondi)
     const safeIndex = index >= livres.length ? 0 : index;
 
-    resultDiv.textContent = `📖 Lecture choisie : ${livres[safeIndex]}`;
+    // Ouverture de la modale de résultat
+    const modal = document.getElementById("roueModal");
+    const resultText = document.getElementById("roueResultatText");
+    
+    if (modal && resultText) {
+      resultText.textContent = livres[safeIndex];
+      modal.dataset.selectedIndex = safeIndex;
+      modal.classList.add("open");
+    }
 
     // Animation de célébration optionnelle
   }, 4000); // Correspond à la durée css transition (4s)
@@ -191,11 +203,131 @@ function initMobileMenu() {
   }
 }
 
+function initChrono() {
+  const display = document.getElementById("chrono-display");
+  if (!display) return; // On n'est pas sur la page chrono
+
+  // Injection de la modale personnalisée (style bleu et noir)
+  if (!document.getElementById("chronoModal")) {
+    const modalHTML = `
+      <div id="chronoModal" class="modal-overlay">
+        <div class="modal-card">
+          <h3>Session terminée ! 📖</h3>
+          <p style="margin-bottom: 20px; color: #c5dbf5; font-size: 1.1rem;">Voulez-vous configurer une pause de 5 minutes ?</p>
+          <div style="display: flex; justify-content: center; gap: 15px;">
+            <button id="btnChronoYes" class="modal-btn">Oui, pause !</button>
+            <button id="btnChronoNo" class="modal-btn" style="background-color:#d9534f;">Non</button>
+          </div>
+        </div>
+      </div>`;
+    document.body.insertAdjacentHTML("beforeend", modalHTML);
+  }
+
+  const rangeInput = document.getElementById("pomodoroRange");
+  const rangeValue = document.getElementById("rangeValue");
+  const btnStart = document.getElementById("btnStart");
+  const btnPause = document.getElementById("btnPause");
+  const btnReset = document.getElementById("btnReset");
+
+  // Éléments de la modale
+  const chronoModal = document.getElementById("chronoModal");
+  const btnYes = document.getElementById("btnChronoYes");
+  const btnNo = document.getElementById("btnChronoNo");
+
+  let timeLeft = parseInt(rangeInput.value) * 60;
+  let interval = null;
+  let isRunning = false;
+
+  const formatTime = (totalSeconds) => {
+    const h = Math.floor(totalSeconds / 3600).toString().padStart(2, "0");
+    const m = Math.floor((totalSeconds % 3600) / 60).toString().padStart(2, "0");
+    const s = (totalSeconds % 60).toString().padStart(2, "0");
+    return `${h}:${m}:${s}`;
+  };
+
+  const updateDisplay = () => {
+    display.textContent = formatTime(timeLeft);
+  };
+
+  // Initialisation
+  updateDisplay();
+
+  // Mise à jour quand on bouge le curseur
+  rangeInput.addEventListener("input", (e) => {
+    if (!isRunning) {
+      const minutes = parseInt(e.target.value);
+      rangeValue.textContent = minutes;
+      timeLeft = minutes * 60;
+      updateDisplay();
+    }
+  });
+
+  // Gestion de la modale personnalisée
+  const closeChronoModal = () => {
+    chronoModal.classList.remove("open");
+  };
+
+  btnYes.onclick = () => {
+    rangeInput.value = 5;
+    rangeValue.textContent = "5";
+    timeLeft = 5 * 60;
+    updateDisplay();
+    closeChronoModal();
+  };
+
+  btnNo.onclick = closeChronoModal;
+
+  btnStart.addEventListener("click", () => {
+    if (isRunning) return;
+    if (timeLeft <= 0) {
+      // Si on est à 0, on remet le temps du slider
+      timeLeft = parseInt(rangeInput.value) * 60;
+    }
+
+    isRunning = true;
+    rangeInput.disabled = true; // Bloque le slider pendant le chrono
+
+    interval = setInterval(() => {
+      if (timeLeft > 0) {
+        timeLeft--;
+        updateDisplay();
+      } else {
+        clearInterval(interval);
+        isRunning = false;
+        rangeInput.disabled = false;
+        // Ouvre la modale personnalisée au lieu de l'alerte navigateur
+        chronoModal.classList.add("open");
+      }
+    }, 1000);
+  });
+
+  btnPause.addEventListener("click", () => {
+    if (isRunning) {
+      clearInterval(interval);
+      isRunning = false;
+      rangeInput.disabled = false;
+    }
+  });
+
+  btnReset.addEventListener("click", () => {
+    if (interval) clearInterval(interval);
+    isRunning = false;
+    rangeInput.disabled = false;
+    
+    // Remet le temps selon le slider
+    const minutes = parseInt(rangeInput.value);
+    timeLeft = minutes * 60;
+    updateDisplay();
+  });
+}
+
 // Initialisation au chargement
 document.addEventListener("DOMContentLoaded", () => {
   genererHeaderFooter();
   updateRoue();
   initBingo();
+  initChrono();
+  initRoueInteraction();
 });
 
 /* ajout pour ma page challenge */ 
@@ -333,4 +465,52 @@ function initBingo() {
   modal.onclick = (e) => {
     if (e.target === modal) closeModal();
   };
+}
+
+function initRoueInteraction() {
+  // Injection de la modale pour la roue
+  if (!document.getElementById("roueModal")) {
+    const modalHTML = `
+      <div id="roueModal" class="modal-overlay">
+        <div class="modal-card">
+          <span class="close-modal" id="closeRoueModal">&times;</span>
+          <h3>C'est tombé sur :</h3>
+          <p id="roueResultatText" style="color: #c5dbf5; font-size: 1.4rem; margin: 20px 0; font-weight: bold; text-shadow: 0 0 10px rgba(91, 124, 171, 0.3);"></p>
+          <button id="btnRoueKeep" class="modal-btn">Garder</button>
+          <button id="btnRoueDelete" class="modal-btn" style="background-color:#d9534f; margin-top:10px;">Supprimer de la liste</button>
+        </div>
+      </div>`;
+    document.body.insertAdjacentHTML("beforeend", modalHTML);
+  }
+
+  const modal = document.getElementById("roueModal");
+  const btnKeep = document.getElementById("btnRoueKeep");
+  const btnDelete = document.getElementById("btnRoueDelete");
+  const btnClose = document.getElementById("closeRoueModal");
+
+  const closeModal = () => {
+    modal.classList.remove("open");
+  };
+
+  if (btnKeep) btnKeep.onclick = closeModal;
+  if (btnClose) btnClose.onclick = closeModal;
+  
+  if (btnDelete) {
+    btnDelete.onclick = () => {
+        const index = modal.dataset.selectedIndex;
+        if (index !== undefined) {
+            livres.splice(index, 1);
+            updateRoue();
+            closeModal();
+            const resultDiv = document.getElementById("resultat");
+            if (resultDiv) resultDiv.textContent = "Livre retiré !";
+        }
+    };
+  }
+
+  if (modal) {
+    modal.onclick = (e) => {
+        if (e.target === modal) closeModal();
+    };
+  }
 }

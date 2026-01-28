@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../css/style.css" rel="stylesheet">
+    <title>Chronomètre Lecture</title>
+</head>
+
+<body>
+    <script src="../Javascript/javascript.js"></script>
+
+    <div class="conteneur">
+        <h1 class="Titre">Chronomètre de Lecture ⏱️</h1>
+        
+        <div class="chrono-section">
+            <div class="pomodoro-controls">
+                <label for="pomodoroRange">Durée : <span id="rangeValue">25</span> min</label>
+                <input type="range" id="pomodoroRange" min="1" max="120" value="25" step="1">
+            </div>
+            <div id="chrono-display" class="chrono-display">00:00:00</div>
+            <div class="chrono-controls">
+                <button id="btnStart" class="chrono-btn start">Démarrer</button>
+                <button id="btnPause" class="chrono-btn pause">Pause</button>
+                <button id="btnReset" class="chrono-btn reset">Réinitialiser</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
