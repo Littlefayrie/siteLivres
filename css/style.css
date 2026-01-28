@@ -591,6 +591,49 @@ body.light-mode .modal-card h3 {
     text-decoration: underline;
 }
 
+/* --- Menu Burger (Mobile) --- */
+.hamburger {
+    display: none; /* Caché sur PC */
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    position: absolute;
+    top: 25px;
+    left: 20px;
+    z-index: 101;
+}
+
+.hamburger span {
+    width: 30px;
+    height: 3px;
+    background: #5b7cab;
+    border-radius: 10px;
+    transition: all 0.3s linear;
+    transform-origin: 1px;
+}
+
+/* Animation du burger */
+.hamburger.open span:nth-child(1) {
+    transform: rotate(45deg);
+}
+.hamburger.open span:nth-child(2) {
+    opacity: 0;
+    transform: translateX(20px);
+}
+.hamburger.open span:nth-child(3) {
+    transform: rotate(-45deg);
+}
+
+/* Adaptation Light Mode pour le burger */
+body.light-mode .hamburger span {
+    background: #1a2d4c;
+}
+
 /* --- Adaptation Mobile (Media Queries) --- */
 @media screen and (max-width: 768px) {
     /* Navigation : on passe en colonne pour que ça rentre */

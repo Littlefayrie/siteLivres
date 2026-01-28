@@ -24,6 +24,11 @@ function genererHeaderFooter() {
 
   const headerHTML = `
     <header>
+        <button class="hamburger" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
         <h1 class="Titre">Mon Univers Livresque</h1>
         <nav class="liens">
             <a href="${basePath}index.html">Accueil</a>
