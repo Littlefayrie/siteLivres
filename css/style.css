@@ -636,11 +636,40 @@ body.light-mode .hamburger span {
 
 /* --- Adaptation Mobile (Media Queries) --- */
 @media screen and (max-width: 768px) {
-    /* Navigation : on passe en colonne pour que ça rentre */
+    .hamburger {
+        display: flex;
+    }
+
+    /* Navigation : menu déroulant */
     .liens {
+        display: none; /* Caché par défaut */
         flex-direction: column;
-        gap: 10px;
-        padding-bottom: 15px;
+        gap: 15px;
+        padding: 20px 0;
+        width: 100%;
+        background-color: #01030b; /* Fond opaque */
+        border-bottom: 2px solid #5b7cab;
+        animation: slideDown 0.3s ease-in-out;
+    }
+
+    .liens.open {
+        display: flex;
+    }
+
+    /* Animation d'ouverture */
+    @keyframes slideDown {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Adaptation fond menu en light mode */
+    body.light-mode .liens {
+        background-color: #f4f6f8;
+    }
+
+    /* Ajustement titre pour ne pas chevaucher le burger */
+    .Titre {
+        padding: 0 50px;
     }
 
     /* On annule la grande marge des liens du menu */
