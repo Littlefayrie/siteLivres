@@ -24,6 +24,11 @@ function genererHeaderFooter() {
 
   const headerHTML = `
     <header>
+        <button class="hamburger" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
         <h1 class="Titre">Mon Univers Livresque</h1>
         <nav class="liens">
             <a href="${basePath}index.html">Accueil</a>
@@ -54,6 +59,7 @@ function genererHeaderFooter() {
   document.body.insertAdjacentHTML("afterbegin", headerHTML);
   document.body.insertAdjacentHTML("beforeend", footerHTML);
   initTheme();
+  initMobileMenu();
 }
 
 function ajouterLivre() {
@@ -169,6 +175,18 @@ function initTheme() {
       const estLight = document.body.classList.contains("light-mode");
       btn.innerHTML = estLight ? sunIcon : moonIcon;
       localStorage.setItem("theme", estLight ? "light" : "dark");
+    });
+  }
+}
+
+function initMobileMenu() {
+  const hamburger = document.querySelector(".hamburger");
+  const nav = document.querySelector(".liens");
+
+  if (hamburger && nav) {
+    hamburger.addEventListener("click", () => {
+      hamburger.classList.toggle("open");
+      nav.classList.toggle("open");
     });
   }
 }
